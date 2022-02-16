@@ -1,0 +1,9 @@
+root - INFO - Loading config.json for getting path variables
+root - INFO - Using Logistic regression for training
+root - INFO - Reading the final.csv file
+root - INFO - Defining X variables as lastmonth_activity, lastyear_activity, number_of_employees
+root - INFO - Defining Y variables as exited
+root - INFO - Splitting the data by 80% for training and 20% for testing
+root - INFO - Training the model
+root - INFO - Creating the model path directory
+root - INFO - Saving the model in model_path
