@@ -75,6 +75,7 @@ def merge_multiple_dataframe():
         df = pd.read_csv(os.path.join(input_path, dataset))
         logging.info("Appending the newly created dataframe combined_df")
         combined_df= combined_df.append(df)
+
     # Getting the date and time for reference
 
     logging.info("Getting date for record keeping")

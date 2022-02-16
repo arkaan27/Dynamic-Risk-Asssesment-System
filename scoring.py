@@ -34,7 +34,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 import json
 import logging
-import datetime
+from datetime import datetime
 
 # Initialising logger for checking steps
 logging.basicConfig(
@@ -92,6 +92,12 @@ def score_model(test_data_path, test_data_csv_name):
     logging.info("Defining y_test as exited from dataframe")
     y_test = df["exited"]
 
+    # Getting the date and time for reference
+
+    logging.info("Getting date for record keeping")
+    dateTimeObj = datetime.now()
+    date_now = str(dateTimeObj.year) + '/' + str(dateTimeObj.month) + '/' + str(dateTimeObj.day)
+
     # Making predictions
 
     logging.info("Making predictions using the Logistic Regression model")
@@ -99,8 +105,17 @@ def score_model(test_data_path, test_data_csv_name):
 
     logging.info("Generating the f1_score")
     f1_score  = metrics.f1_score(predictions, y_test)
+
+    # Creating all records
+
+    logging.info("Creating Records for predictitons")
+    allrecord = [test_data_path, test_data_csv_name, len(df.index), date_now, f1_score]
+
+    # Writing the file
+    
+    logging.info("Writing file to latestscore.txt")
     with open(output_scores_path, "w") as f:
-        f.write(str(f1_score))
+        f.write(str(allrecord))
 
 if __name__ == "__main__":
     score_model(test_data_path, "testdata.csv")
