@@ -1,3 +1,19 @@
+"""
+Name: scoring.py
+
+Summary:
+Takes a trained model, loads test data and calculates an F1 score for the model relative to test data
+
+Saves the result in latestscore.txt file
+
+
+Author: Arkaan Quanunga
+Date: 16/02/2022
+
+function:
+
+"""
+
 from flask import Flask, session, jsonify, request
 import pandas as pd
 import numpy as np
@@ -8,6 +24,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 import json
 import logging
+import datetime
 
 # Initialising logger for checking steps
 logging.basicConfig(
@@ -25,10 +42,51 @@ with open('config.json','r') as f:
 
 dataset_csv_path = os.path.join(config['output_folder_path']) 
 test_data_path = os.path.join(config['test_data_path']) 
-
+output_model_path= os.path.join(config["output_model_path"])
 
 # Function for model scoring
-def score_model():
-    #this function should take a trained model, load test data, and calculate an F1 score for the model relative to the test data
-    #it should write the result to the latestscore.txt file
+def score_model(test_data_path, test_data_csv_name):
+    """
+    Takes a trained model, loads test data and calculates an F1 score for the model relative to test data
+    :return: Saves the result file as latestscore.txt file
+    """
+
+    # Defining necessary paths
+
+    logging.info("Defining the necessary path variables")
+    model_path = os.path.join(output_model_path, "trainedmodel.pkl")
+    test_dataset_path = os.path.join(test_data_path, test_data_csv_name)
+    output_scores_path = os.path.join(output_model_path, "latestscore.txt")
+
+    # Reading the dataset
+    
+    logging.info("Reading the dataset")
+    df = pd.read_csv(test_dataset_path)
+
+    # Loading the model
+
+    logging.info("Loading the model with pickle module")
+    with open(model_path, "rb") as file:
+        model = pickle.load(file)
+
+    # Defining X variables and Y variables for testing
+
+    logging.info("Defining X_test as lastmonth_activity, lastyear_activity and number_of_employees")
+    X_test = df.loc[
+        :, ["lastmonth_activity", "lastyear_activity", "number_of_employees"]
+    ]
+
+    logging.info("Defining y_test as exited from dataframe")
+    y_test = df["exited"]
+
+    # Making predictions
+
+    logging.info("Making predictions using the Logistic Regression model")
+    predictions = model.predict(X_test)
+
+    logging.info("Generating the f1_score")
+    f1_score  = metrics.f1_score(predictions, y_test)
+    with open(output_scores_path, "w") as f:
+        f.write(str(f1_score))
+
 
