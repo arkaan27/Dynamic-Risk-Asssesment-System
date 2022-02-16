@@ -10,8 +10,18 @@ Saves the result in latestscore.txt file
 Author: Arkaan Quanunga
 Date: 16/02/2022
 
-function:
+Functions:
 
+1. score_model:
+
+inputs:
+- name:         test_data_path
+  type:         [str]
+  description:  The path to the test data
+
+- name:         test_data_csv_name
+- type:         [str]
+- description:  The name of the dataset used for testing the model
 """
 
 from flask import Flask, session, jsonify, request
@@ -34,7 +44,7 @@ logging.basicConfig(
     format='%(name)s - %(levelname)s - %(message)s')
 
 
-#Load config.json and get path variables
+# Load config.json and get path variables
 
 logging.info("Loading config.json for getting path variables")
 with open('config.json','r') as f:
@@ -45,9 +55,12 @@ test_data_path = os.path.join(config['test_data_path'])
 output_model_path= os.path.join(config["output_model_path"])
 
 # Function for model scoring
+
 def score_model(test_data_path, test_data_csv_name):
     """
     Takes a trained model, loads test data and calculates an F1 score for the model relative to test data
+    :param test_data_path: [str] The path to the test data
+    :param test_data_csv_name: [str] The name of the test dataset
     :return: Saves the result file as latestscore.txt file
     """
 
@@ -59,7 +72,7 @@ def score_model(test_data_path, test_data_csv_name):
     output_scores_path = os.path.join(output_model_path, "latestscore.txt")
 
     # Reading the dataset
-    
+
     logging.info("Reading the dataset")
     df = pd.read_csv(test_dataset_path)
 
@@ -90,3 +103,5 @@ def score_model(test_data_path, test_data_csv_name):
         f.write(str(f1_score))
 
 
+if __name__ == "__main__":
+    score_model(test_data_path, "testdata.csv")
