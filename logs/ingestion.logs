@@ -1,0 +1,11 @@
+root - INFO - Creating output directory
+root - INFO - Checking for only .csv files
+root - INFO - Creating an empty dataframe
+root - INFO - Reading the files with pandas module
+root - INFO - Appending the newly created dataframe combined_df
+root - INFO - Appending the newly created dataframe combined_df
+root - INFO - Getting date for record keeping
+root - INFO - Dropping duplicates
+root - INFO - Creating Records for dataframe
+root - INFO - Exporting the dataframe to csv as finaldata.csv
+root - INFO - Adding records to ingested_files.txt

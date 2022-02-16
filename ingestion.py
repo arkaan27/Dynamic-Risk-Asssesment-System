@@ -48,31 +48,43 @@ def merge_multiple_dataframe():
     input_path = f"{current_dir}/{input_folder_path}"
 
     # Creating the output folder if it does not exist
+    logging.info("Creating output directory")
     if not os.path.exists(output_folder_path):
         os.makedirs(output_folder_path)
-        logging.info("Creating output directory")
 
     # Joining the output folder path
-    output_path = os.path.join(os.getcwd, output_folder_path)
+    output_path = os.path.join(os.getcwd(), output_folder_path)
 
     # Listing the files present in the input path
     files = os.listdir(input_path)
 
+    # Checking only .csv files
+    logging.info("Checking for only .csv files")
+    datasets = [x for x in files if x[-4:] == '.csv']
+
+    # Creating empty dataframe
+
+    logging.info("Creating an empty dataframe")
+    combined_df = pd.DataFrame()
+
+
     # Reading the data frame from the folder
 
     logging.info("Reading the files with pandas module")
-    df = [pd.read_csv(os.path.join(input_path, fname) for fname in files)]
-
+    for dataset in datasets:
+        df = pd.read_csv(os.path.join(input_path, dataset))
+        logging.info("Appending the newly created dataframe combined_df")
+        combined_df= combined_df.append(df)
     # Getting the date and time for reference
 
     logging.info("Getting date for record keeping")
     dateTimeObj = datetime.now()
     date_now = str(dateTimeObj.year) + '/' + str(dateTimeObj.month) + '/' + str(dateTimeObj.day)
 
-    # Combining the files into one dataframe
-
-    logging.info("Combining the dataframes together")
-    combined_df = pd.concat(df)
+    # # Combining the files into one dataframe
+    #
+    # logging.info("Combining the dataframes together")
+    # combined_df = pd.concat(df)
 
     # Cleaning the data
 
