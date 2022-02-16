@@ -102,6 +102,5 @@ def score_model(test_data_path, test_data_csv_name):
     with open(output_scores_path, "w") as f:
         f.write(str(f1_score))
 
-
 if __name__ == "__main__":
     score_model(test_data_path, "testdata.csv")

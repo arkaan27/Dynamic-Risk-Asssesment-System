@@ -1,0 +1,8 @@
+root - INFO - Loading config.json for getting path variables
+root - INFO - Defining the necessary path variables
+root - INFO - Reading the dataset
+root - INFO - Loading the model with pickle module
+root - INFO - Defining X_test as lastmonth_activity, lastyear_activity and number_of_employees
+root - INFO - Defining y_test as exited from dataframe
+root - INFO - Making predictions using the Logistic Regression model
+root - INFO - Generating the f1_score
