@@ -4,5 +4,8 @@ root - INFO - Reading the dataset
 root - INFO - Loading the model with pickle module
 root - INFO - Defining X_test as lastmonth_activity, lastyear_activity and number_of_employees
 root - INFO - Defining y_test as exited from dataframe
+root - INFO - Getting date for record keeping
 root - INFO - Making predictions using the Logistic Regression model
 root - INFO - Generating the f1_score
+root - INFO - Creating Records for predictions
+root - INFO - Writing file to latestscore.txt

@@ -1,1 +1,5 @@
-0.5714285714285715
+test_data_path-> testdata
+file_name-> testdata.csv
+Length_of_test_dataset-> 5
+Date-> 2022/2/16
+F1_SCORE-> 0.5714285714285715

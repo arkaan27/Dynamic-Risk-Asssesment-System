@@ -43,16 +43,16 @@ logging.basicConfig(
     filemode='w',
     format='%(name)s - %(levelname)s - %(message)s')
 
-
 # Load config.json and get path variables
 
 logging.info("Loading config.json for getting path variables")
-with open('config.json','r') as f:
-    config = json.load(f) 
+with open('config.json', 'r') as f:
+    config = json.load(f)
 
-dataset_csv_path = os.path.join(config['output_folder_path']) 
-test_data_path = os.path.join(config['test_data_path']) 
-output_model_path= os.path.join(config["output_model_path"])
+dataset_csv_path = os.path.join(config['output_folder_path'])
+test_data_path = os.path.join(config['test_data_path'])
+output_model_path = os.path.join(config["output_model_path"])
+
 
 # Function for model scoring
 
@@ -86,8 +86,8 @@ def score_model(test_data_path, test_data_csv_name):
 
     logging.info("Defining X_test as lastmonth_activity, lastyear_activity and number_of_employees")
     X_test = df.loc[
-        :, ["lastmonth_activity", "lastyear_activity", "number_of_employees"]
-    ]
+             :, ["lastmonth_activity", "lastyear_activity", "number_of_employees"]
+             ]
 
     logging.info("Defining y_test as exited from dataframe")
     y_test = df["exited"]
@@ -104,18 +104,25 @@ def score_model(test_data_path, test_data_csv_name):
     predictions = model.predict(X_test)
 
     logging.info("Generating the f1_score")
-    f1_score  = metrics.f1_score(predictions, y_test)
+    f1_score = metrics.f1_score(predictions, y_test)
 
-    # Creating all records
+    # Creating all records as dictionary
 
-    logging.info("Creating Records for predictitons")
-    allrecord = [test_data_path, test_data_csv_name, len(df.index), date_now, f1_score]
+    logging.info("Creating Records for predictions")
+    allrecord = {"test_data_path": str(test_data_path),
+                 "file_name": test_data_csv_name,
+                 "Length_of_test_dataset":  str(len(df.index)),
+                 "Date": date_now,
+                 "F1_SCORE": str(f1_score)}
 
     # Writing the file
-    
+
     logging.info("Writing file to latestscore.txt")
+
     with open(output_scores_path, "w") as f:
-        f.write(str(allrecord))
+        for key,value in allrecord.items():
+            f.write(key + '-> ' + value + "\n")
+
 
 if __name__ == "__main__":
     score_model(test_data_path, "testdata.csv")
