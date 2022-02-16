@@ -1,18 +1,19 @@
 """
-_summary_
+Name: Ingestion.py
 
-Ingestion     
-    
+Summary:
+
+Automation Script for extracting unstructured data from one or multiple sources.
+Then preeparing the data for training machine learning model.
+     
 Author: Arkaan Quanunga
 Date: 16/02/2022
     
 Functions:
 
-Automation Script for extracting unstructured data from one or multiple sources.
-Then preeparing the data for training machine learning model.
-
 1. merge_multiple_dataframe: check for datasets, compile them together, and write to an output file
-2. main: running the script 
+2. main: running the script
+
 """
 
 import pandas as pd
