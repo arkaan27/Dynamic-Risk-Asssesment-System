@@ -1,3 +1,20 @@
+"""
+Name: training.py
+
+Summary:
+Used to train a Logistic Regression model with ingesteddata - finaldata.csv
+
+Author: Arkaan Quanunga
+Date: 16/02/2022
+
+Functions:
+1. train model: processes ingesteddata,
+                splits data into test & training data,
+                trains the model
+                saves the model to directory
+"""
+
+
 from flask import Flask, session, jsonify, request
 import pandas as pd
 import numpy as np
@@ -30,6 +47,10 @@ model_path = os.path.join(config['output_model_path'])
 
 # Function for training the model
 def train_model():
+    """
+    Processes data, splits data, trains model and saves model in model path
+    :return: Saves the model to model_path
+    """
     # Use this logistic regression for training
 
     logging.info("Using Logistic regression for training")
