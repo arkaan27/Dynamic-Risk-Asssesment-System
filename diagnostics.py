@@ -21,6 +21,8 @@ Functions:
                             - Standard Deviation
                             - Inter Quartile Range
 
+- name:     execution_time
+-
 """
 import pandas as pd
 import numpy as np
@@ -29,6 +31,8 @@ import pickle
 import os
 import json
 from scipy import stats
+import time
+import subprocess as sp
 
 # Load config.json and get environment variables
 
@@ -68,28 +72,45 @@ def dataframe_summary(data_path):
     """
     Calculates the summary of the dataset
     :param: data [dataframe] The dataset for the analysis
-    :return: summary stats [list] list of statistics of the dataset:
+    :return: summary_stats [dictionary] list of statistics of the dataset:
                 - mean
                 - median
                 - Standard deviation
                 - InterQuartile Range (IQR)
     """
-    # calculate summary statistics here
 
     # Reading the data
     data = pd.read_csv(data_path)
     X = data.loc[:, ["lastmonth_activity", "lastyear_activity", "number_of_employees"]]
+
+    # Calculating summary stats
     summary_stats = {col:
                          {"Mean": X[col].mean(axis=0), "Median": X[col].median(axis=0), "Standard_Deviation": X[col].std(axis=0),
                        "IQR": stats.iqr(X[col], interpolation='midpoint')} for col in X}
 
     return summary_stats  # return value should be a list containing all summary statistics
+                          # Better it's a dictionary with extendable access
 
 
-##################Function to get timings
-def execution_time():
+# Function to get timings
+def execution_time(file_names):
+    """
+    Calculates the execution time for all the files present in the file_names list
+
+    :param file_names [list] A list of file names to run and calculate execution time
+    :return: timings [dictionary] A dictionary with execution timings of all the files present in file_names list
+    """
     # calculate timing of training.py and ingestion.py
-    return  # return a list of 2 timing values in seconds
+    timings ={}
+    for file in file_names:
+        start_time_training = time.time()
+        sp.call(["python", file])
+        end_time_training = time.time() - start_time_training
+        timings[file]=end_time_training
+
+    return timings
+    # return a list of 2 timing values in seconds
+    # Better use dictionary for easier access
 
 
 ##################Function to check dependencies
@@ -102,5 +123,9 @@ if __name__ == '__main__':
     # Running the script
     model_predictions(test_dataset_path)
     dataframe_summary(ingested_dataset_path)
-    # execution_time()
+
+    # Defining the list of files to check
+    file_names = ["training.py", "ingestion.py", "scoring.py"]
+    timing = execution_time(file_names)
+
     # outdated_packages_list()
