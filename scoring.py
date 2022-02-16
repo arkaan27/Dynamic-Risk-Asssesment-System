@@ -96,7 +96,7 @@ def score_model(test_data_path, test_data_csv_name):
 
     logging.info("Getting date for record keeping")
     dateTimeObj = datetime.now()
-    date_now = str(dateTimeObj.year) + '/' + str(dateTimeObj.month) + '/' + str(dateTimeObj.day)
+    date_now = str(dateTimeObj.day) + '/' + str(dateTimeObj.month) + '/' + str(dateTimeObj.year)
 
     # Making predictions
 

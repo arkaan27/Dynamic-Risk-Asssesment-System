@@ -1,1 +1,4 @@
-practicedata['dataset1.csv', 'dataset2.csv']262022/2/16
+input_folder_path-> practicedata
+List_of_datasets-> ['dataset1.csv', 'dataset2.csv']
+Length_of_combined_dataset-> 26
+Date-> 2022/2/16

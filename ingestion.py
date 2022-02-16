@@ -80,7 +80,7 @@ def merge_multiple_dataframe():
 
     logging.info("Getting date for record keeping")
     dateTimeObj = datetime.now()
-    date_now = str(dateTimeObj.year) + '/' + str(dateTimeObj.month) + '/' + str(dateTimeObj.day)
+    date_now = str(dateTimeObj.day) + '/' + str(dateTimeObj.month) + '/' + str(dateTimeObj.year)
 
     # # Combining the files into one dataframe
     #
@@ -95,8 +95,11 @@ def merge_multiple_dataframe():
     # Creating all records
 
     logging.info("Creating Records for dataframe")
-    allrecord = [input_folder_path, files, len(combined_df.index), date_now]
-
+    allrecord = {
+        "input_folder_path": input_folder_path,
+        "List_of_datasets": str(files),
+        "Length_of_combined_dataset": str(len(combined_df.index)),
+        "Date": date_now}
     # Exporting the dataframe to csv
 
     logging.info("Exporting the dataframe to csv as finaldata.csv")
@@ -108,8 +111,10 @@ def merge_multiple_dataframe():
     logging.info("Adding records to ingested_files.txt")
     output_txt_path = os.path.join(output_path, "ingestedfiles.txt")
     with open(output_txt_path, "w") as f:
-        for element in allrecord:
-            f.write(str(element))
+        for key, value in allrecord.items():
+            f.write(
+                key + "-> " + value + "\n",
+            )
 
 
 if __name__ == '__main__':
