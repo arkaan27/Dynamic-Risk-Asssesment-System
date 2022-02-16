@@ -51,6 +51,7 @@ def train_model():
     Processes data, splits data, trains model and saves model in model path
     :return: Saves the model to model_path
     """
+
     # Use this logistic regression for training
 
     logging.info("Using Logistic regression for training")

@@ -1,0 +1,3 @@
+root - INFO - Loading config.json for getting path variables
+root - INFO - Creating production deployment directory
+root - INFO - Copying all files to production deployment path
