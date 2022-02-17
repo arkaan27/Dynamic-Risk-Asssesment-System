@@ -1,0 +1,1 @@
+*/10 * * * * python /home/asif/dynamic-risk-assessment-system/fullprocess.py
