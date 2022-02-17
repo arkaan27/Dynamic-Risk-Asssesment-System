@@ -18,7 +18,10 @@ with open('config.json','r') as f:
     config = json.load(f) 
 
 dataset_csv_path = os.path.join(config['output_folder_path']) 
+test_data_path = os.path.join(config["test_data_path"])
+output_model_path = os.path.join(config["output_model_path"])
 
+model_path = os.path.join(output_model_path, "trainedmodel.pkl")
 prediction_model = None
 
 
