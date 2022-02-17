@@ -98,6 +98,16 @@ def dataframe_summary(data_path):
     return summary_stats  # return value should be a list containing all summary statistics
                           # Better it's a dictionary with extendable access
 
+# Function for missing data
+def dataframe_missing_data(data_file_path):
+    """
+
+    :param data_file_path: [str] The file_path of the data that is going to be checked for missing data
+    :return: [float] Percentage of missing values
+    """
+    # Calculate percentage of missing values
+    df = pd.read_csv(data_file_path)
+    return df.isna().sum() / df.count().sum()
 
 # Function to get timings
 def execution_time(file_names):
@@ -136,12 +146,20 @@ def outdated_packages_list():
 
 if __name__ == '__main__':
     # Running the script
+
+    #  Model predictions
     model_predictions(test_dataset_path)
+
+    #  Dataframe summary
     dataframe_summary(ingested_dataset_path)
+
+    # Dataframe missing data
+    dataframe_missing_data(ingested_dataset_path)
 
     # Defining the list of files to check execution time
     file_names = ["training.py", "ingestion.py", "scoring.py"]
     execution_time(file_names)
 
+    # Checking for outdated packages
     outdated_packages_list()
 
