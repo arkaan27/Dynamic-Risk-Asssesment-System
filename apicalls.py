@@ -10,7 +10,7 @@ output_model_path = os.path.join(config["output_model_path"])
 
 
 #Call each API endpoint and store the responses
-response1 =  requests.post(
+response1 = requests.post(
     f"{URL}prediction?dataset=testdata/testdata.csv").content #put an API call here
 response2 = requests.get(f"{URL}scoring").content #put an API call here
 response3 = requests.get(f"{URL}summary_stats").content #put an API call here

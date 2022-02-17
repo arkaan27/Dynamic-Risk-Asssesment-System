@@ -19,7 +19,7 @@ import os
 
 
 
-######################Set up variables for use in our script
+# Set up variables for use in our script
 app = Flask(__name__)
 app.secret_key = '1652d576-484a-49fd-913a-6879acfa6ba4'
 
