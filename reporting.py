@@ -35,7 +35,6 @@ test_data_path = os.path.join(config["test_data_path"])
 output_model_path = os.path.join(config["output_model_path"])
 test_dataset_path = os.path.join(test_data_path, "testdata.csv")
 
-
 # Function for reporting
 def score_model(data_path):
     """

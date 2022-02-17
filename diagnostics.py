@@ -54,7 +54,7 @@ ingested_dataset_path = os.path.join(dataset_csv_path, "finaldata.csv")
 
 
 # Function to get model predictions
-def model_predictions(data_path):
+def model_predictions(data):
     """
     Read the deployed model and a test dataset, calculate predictions
     :param data_path: Path to the dataset for predictions [str]
@@ -64,8 +64,6 @@ def model_predictions(data_path):
     with open(os.path.join(prod_deployment_path, 'trainedmodel.pkl'), "rb") as f:
         model = pickle.load(f)
 
-    # Reading the dataset
-    data = pd.read_csv(data_path)
     X_test = data.loc[
              :, ["lastmonth_activity", "lastyear_activity", "number_of_employees"]
              ]
@@ -75,7 +73,7 @@ def model_predictions(data_path):
 
 
 # Function to get summary statistics
-def dataframe_summary(data_path):
+def dataframe_summary(data):
     """
     Calculates the summary of the dataset
     :param: data [dataframe] The dataset for the analysis
@@ -87,7 +85,7 @@ def dataframe_summary(data_path):
     """
 
     # Reading the data
-    data = pd.read_csv(data_path)
+
     X = data.loc[:, ["lastmonth_activity", "lastyear_activity", "number_of_employees"]]
 
     # Calculating summary stats
@@ -147,11 +145,15 @@ def outdated_packages_list():
 if __name__ == '__main__':
     # Running the script
 
+    # Reading the dataset
+    data = pd.read_csv(test_dataset_path)
+
     #  Model predictions
-    model_predictions(test_dataset_path)
+    model_predictions(data)
 
     #  Dataframe summary
-    dataframe_summary(ingested_dataset_path)
+    dataset = pd.read_csv(ingested_dataset_path)
+    dataframe_summary(dataset)
 
     # Dataframe missing data
     dataframe_missing_data(ingested_dataset_path)
