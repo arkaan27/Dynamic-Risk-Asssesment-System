@@ -22,7 +22,7 @@ prod_deployment_path = os.path.join(config["prod_deployment_path"])
 ingested_file_path = os.path.join(prod_deployment_path, "ingestedfiles.txt")
 latest_score_path = os.path.join(prod_deployment_path, "latestscore.txt")
 
-##################Check and read new data
+# Check and read new data
 # first, read ingestedfiles.txt
 with open(ingested_file_path, "r") as f:
     ingested_files = literal_eval(f.read())
