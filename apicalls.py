@@ -10,15 +10,18 @@ output_model_path = os.path.join(config["output_model_path"])
 
 
 #Call each API endpoint and store the responses
-response1 = #put an API call here
-response2 = #put an API call here
-response3 = #put an API call here
-response4 = #put an API call here
+response1 =  requests.post(
+    f"{URL}prediction?dataset=testdata/testdata.csv").content #put an API call here
+response2 = requests.get(f"{URL}scoring").content #put an API call here
+response3 = requests.get(f"{URL}summary_stats").content #put an API call here
+response4 = requests.get(f"{URL}diagnostics").content  #put an API call here
 
 #combine all API responses
-responses = #combine reponses here
+responses = [response1, response2, response3, response4] #combine reponses here
 
 #write the responses to your workspace
-
+file_to_save = os.path.join(output_model_path, "apireturns.txt")
+with open(file_to_save, "w") as f:
+    f.write(str(responses))
 
 
