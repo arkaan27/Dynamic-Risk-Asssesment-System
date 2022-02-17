@@ -1,5 +1,5 @@
 """
-Name: diagnosotics.py
+Name: diagnostics.py
 
 Summary:
 
@@ -11,7 +11,7 @@ Date: 16/02/2022
 Functions:
 - name:     model_predictions
 - input:    data_path [str] The path to the dataset for predictions
-- return:   predictions [list] The predictins of the dataset in a list format
+- return:   predictions [list] The predictions of the dataset in a list format
 
 - name:      dataframe_summary
 - input:     data_path [str] The path to the dataset for analysis
@@ -22,8 +22,15 @@ Functions:
                             - Inter Quartile Range
 
 - name:     execution_time
--
+- input:    file_names [list] A list of file names to run and calculate execution time
+- return:   timings [dictionary] A dictionary with execution timings of all the files present in file_names list
+
+- name: outdated_packages
+- input: None
+- return: indented results [] The list of outdated packages used by the machine learning models
 """
+import sys
+
 import pandas as pd
 import numpy as np
 import timeit
@@ -113,10 +120,18 @@ def execution_time(file_names):
     # Better use dictionary for easier access
 
 
-##################Function to check dependencies
+# Function to check dependencies
 def outdated_packages_list():
     # get a list of
-    return
+    """
+    Lists the outdated packages that are being used by the machine learning model
+    :return: indented results [] The list of outdated packages
+    """
+    args = [sys.executable, "-m", "pip", "list", "--outdated"]
+    results = sp.run(args, capture_output=True, check=True).stdout
+    indented_results = ("\n" + results.decode().replace("\n", "\n   "))
+
+    return indented_results
 
 
 if __name__ == '__main__':
@@ -124,8 +139,9 @@ if __name__ == '__main__':
     model_predictions(test_dataset_path)
     dataframe_summary(ingested_dataset_path)
 
-    # Defining the list of files to check
+    # Defining the list of files to check execution time
     file_names = ["training.py", "ingestion.py", "scoring.py"]
-    timing = execution_time(file_names)
+    execution_time(file_names)
 
-    # outdated_packages_list()
+    outdated_packages_list()
+
