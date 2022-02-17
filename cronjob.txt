@@ -1,1 +1,1 @@
-*/10 * * * * python D:\starter\fullprocess.py
+*/10 * * * * python D:/starter/fullprocess.py
