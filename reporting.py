@@ -7,7 +7,11 @@ Module for reporting the machine learning model statistics to the app.py/ Flask 
 Author: Arkaan Quanunga
 Date: 17/02/2022
 
+Functions:
 
+- name: score_model
+- input: data_path [str] The dataset path for the test data
+- return: Saves the confusion matrix in output_model_path as "confusionmatrix.png"
 
 """
 
