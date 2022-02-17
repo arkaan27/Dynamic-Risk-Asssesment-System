@@ -1,10 +1,17 @@
+"""
+Name: app.py
+
+Summary:
+Module for calling API endpoints for users to interact
+
+Author: Arkaan Quanunga
+Date: 17/02/2022
+"""
+
 from flask import Flask, session, jsonify, request
 import pandas as pd
 import numpy as np
 import pickle
-import create_prediction_model
-import diagnosis 
-import predict_exited_from_saved_model
 from diagnostics import model_predictions, dataframe_summary,execution_time,outdated_packages_list, dataframe_missing_data
 from reporting import score_model
 import json

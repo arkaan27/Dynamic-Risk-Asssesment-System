@@ -1,8 +1,12 @@
+import os
 import requests
+import json
 
 #Specify a URL that resolves to your workspace
 URL = "http://127.0.0.1/"
-
+with open("config.json", "r") as f:
+    config = json.load(f)
+output_model_path = os.path.join(config["output_model_path"])
 
 
 #Call each API endpoint and store the responses
